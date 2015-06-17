@@ -39,6 +39,10 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/nerdtree'
+"Plugin 'Shougo/unite.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'zhaocai/GoldenView.Vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -77,10 +81,22 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
+" tabulation politic
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+set colorcolumn=110
 
 set background=dark
 " YOU_COMPLETE_ME SETTINGS!!!
 let g:ycm_confirm_extra_conf = 0
+
+" OmniSharp settings
+let g:OmniSharp_server_type = 'roslyn'
+
+" TagBar settings
+"let g:tagbar_expand = 1
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -182,17 +198,17 @@ endif
 
 
 " returns true iff is NERDTree open/active
-function! IsNerdTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-function! CallNerdFindIfOk()
-  if &modifiable && IsNerdTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+"function! IsNerdTreeOpen()        
+"  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+"endfunction
+"
+"" calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
+"function! CallNerdFindIfOk()
+"  if &modifiable && IsNerdTreeOpen() && strlen(expand('%')) > 0 && !&diff
+"    NERDTreeFind
+"    wincmd p
+"  endif
+"endfunction
 
 
 nnoremap <F7> :tabp<ENTER>
@@ -212,9 +228,13 @@ nnoremap <silent> <F5> :NERDTreeToggle<CR>
 
 " start outlet for cpp and cs files
 autocmd BufRead *.h,*.cpp,*.cs TagbarOpen
-autocmd BufEnter * call CallNerdFindIfOk() 
+"autocmd BufEnter * call CallNerdFindIfOk() 
 " Start NERDTree
-autocmd VimEnter * NERDTree
+"autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Omnisharp find symbol
+autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
