@@ -34,7 +34,7 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'OmniSharp/omnisharp-vim'
+"Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
 Plugin 'flazz/vim-colorschemes'
@@ -42,7 +42,7 @@ Plugin 'scrooloose/nerdtree'
 "Plugin 'Shougo/unite.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'
-Plugin 'zhaocai/GoldenView.Vim'
+"Plugin 'zhaocai/GoldenView.Vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -91,12 +91,39 @@ set colorcolumn=110
 set background=dark
 " YOU_COMPLETE_ME SETTINGS!!!
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " OmniSharp settings
 let g:OmniSharp_server_type = 'roslyn'
 
+let g:goldenview__enable_at_startup = 1
+
 " TagBar settings
 "let g:tagbar_expand = 1
+
+" EasyGrepo settings
+let g:EasyGrepRecursive=1
+let g:EasyGrepWindow=1
+let g:EasyGrepMode=2
+let g:EasyGrepJumpToMatch=0
+let g:EasyGrepFilesToExclude=".git,.meta"
+let g:EasyGrepCommand=1
+
+
+" CtrlP settings
+unlet g:ctrlp_custom_ignore
+unlet g:ctrlp_user_command
+let g:ctrlp_by_filename=1
+let g:ctrlp_regexp = 1
+let g:ctrlp_match_window = 'bottom,order:btt,min:10,max:10,results:10'
+let g:ctrlp_switch_buffer = 'Et'
+let g:ctrlp_tabpage_position = 'ac' 
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs~)$',
+    \ }
+let g:ctrlp_max_files = 100000
+
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -210,6 +237,7 @@ endif
 "  endif
 "endfunction
 
+nnoremap <S-Enter> o<Esc>
 
 nnoremap <F7> :tabp<ENTER>
 nnoremap <F8> :tabn<ENTER>
@@ -226,15 +254,19 @@ nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
 
+" search selection in visual mode
+vnoremap // y/<C-R>"<CR>
+
 " start outlet for cpp and cs files
 autocmd BufRead *.h,*.cpp,*.cs TagbarOpen
 "autocmd BufEnter * call CallNerdFindIfOk() 
 " Start NERDTree
 "autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Omnisharp find symbol
 autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
 autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+autocmd FileType cs nnoremap <leader>r :OmniSharpRename<cr>
