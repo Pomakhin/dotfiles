@@ -15,6 +15,8 @@ if v:progname =~? "evim"
   finish
 endif
 
+unmap <c-t>
+
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -123,6 +125,7 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs\~)$',
     \ }
 let g:ctrlp_max_files = 100000
+
 
 
 if has("vms")
