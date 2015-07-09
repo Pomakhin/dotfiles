@@ -20,6 +20,8 @@ unmap <c-t>
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+" They say this prevent VIM from adding newline at end of file
+set fileformats+=dos
 
 filetype off                  " required
 
@@ -44,6 +46,7 @@ Plugin 'scrooloose/nerdtree'
 "Plugin 'Shougo/unite.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'
+Plugin 'tpope/vim-fugitive'
 "Plugin 'zhaocai/GoldenView.Vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -87,8 +90,6 @@ set guioptions-=L  "remove left-hand scroll bar
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-
-set colorcolumn=110
 
 set background=dark
 " YOU_COMPLETE_ME SETTINGS!!!
