@@ -38,7 +38,7 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'Valloric/YouCompleteMe'
-"Plugin 'OmniSharp/omnisharp-vim'
+" Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
 Plugin 'flazz/vim-colorschemes'
@@ -90,6 +90,7 @@ set guioptions-=L  "remove left-hand scroll bar
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set expandtab
 
 set background=dark
 
@@ -113,8 +114,9 @@ let g:EasyGrepRecursive=1
 let g:EasyGrepWindow=1
 let g:EasyGrepMode=2
 let g:EasyGrepJumpToMatch=0
-let g:EasyGrepFilesToExclude=".git,.meta"
+let g:EasyGrepFilesToExclude=".git,.meta,.un~"
 let g:EasyGrepCommand=1
+let g:EasyGrepReplaceWindowMode=2
 
 
 " CtrlP settings
@@ -289,3 +291,10 @@ inoremap <silent><C-Left> <C-o>:call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar
 inoremap <silent><C-Right> <C-o>:call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>
 vnoremap <silent><C-Left> :<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%^','bW')<CR>v`>o
 vnoremap <silent><C-Right> <Esc>`>:<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>v`<o
+
+
+" Log.Temp macro insert file name and method name
+let @l = 'oLog.Temp();hi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!!$'
+let @c = '`>a*/`<i/*'
+
+
