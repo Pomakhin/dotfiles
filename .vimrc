@@ -117,6 +117,7 @@ let g:EasyGrepJumpToMatch=0
 let g:EasyGrepFilesToExclude=".git,.meta,.un~"
 let g:EasyGrepCommand=1
 let g:EasyGrepReplaceWindowMode=2
+let g:EasyGrepSearchCurrentBufferDir=0  
 
 
 " CtrlP settings
@@ -246,6 +247,12 @@ endif
 "    wincmd p
 "  endif
 "endfunction
+" remove temp logs
+function s:RemoveTempLogs()
+    :Grep ^\s*Log\.Temp.*!!!
+    :ResultListDo delete
+endfunction
+command! RemoveTempLogs :call s:RemoveTempLogs()
 
 nnoremap <S-Enter> o<Esc>
 
