@@ -38,7 +38,7 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
 Plugin 'flazz/vim-colorschemes'
@@ -100,9 +100,13 @@ set directory=~/vimtmp,.
 " YOU_COMPLETE_ME SETTINGS!!!
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:Omnisharp_start_server = 0
+let g:Omnisharp_stop_server  = 0
+let g:OmniSharp_host="http://localhost:20001"
+let g:ycm_csharp_server_port = 20001
 
 " OmniSharp settings
-let g:OmniSharp_server_type = 'roslyn'
+" let g:OmniSharp_server_type = 'roslyn'
 
 let g:goldenview__enable_at_startup = 1
 
@@ -289,6 +293,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
 autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
 autocmd FileType cs nnoremap <leader>r :OmniSharpRename<cr>
+autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
 
 " CamelCase move
 let g:camelchar = "A-Z0-9.,;:{([`'\""
