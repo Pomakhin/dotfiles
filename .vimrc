@@ -47,6 +47,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-fugitive'
+Plugin 'beyondmarc/glsl.vim'
 "Plugin 'zhaocai/GoldenView.Vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -138,7 +139,7 @@ let g:ctrlp_custom_ignore = {
     \ }
 let g:ctrlp_max_files = 100000
 
-
+let g:glsl_file_extensions = '*.glsl,*.vsh,*.fsh,*.frag,*.vert'
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
