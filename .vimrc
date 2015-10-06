@@ -266,6 +266,9 @@ command! RemoveTempLogs :call s:RemoveTempLogs()
 
 nnoremap <S-Enter> o<Esc>
 
+" show\hide invisible characters
+nmap <leader>l :set list!<CR>
+
 nnoremap <F7> :tabp<ENTER>
 nnoremap <F8> :tabn<ENTER>
 nnoremap <F2> :YcmCompleter GoToDefinition<ENTER>
