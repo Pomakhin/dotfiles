@@ -15,7 +15,7 @@ if v:progname =~? "evim"
   finish
 endif
 
-unmap <c-t>
+silent! unmap <c-t>
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -126,8 +126,7 @@ let g:EasyGrepSearchCurrentBufferDir=0
 
 
 " CtrlP settings
-unlet g:ctrlp_custom_ignore
-unlet g:ctrlp_user_command
+silent! unlet g:ctrlp_custom_ignore
 let g:ctrlp_by_filename=1
 let g:ctrlp_regexp = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:10,max:10,results:10'
@@ -206,6 +205,9 @@ if has("autocmd")
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
 
+  " Apply vimrc change after save
+  autocmd bufwritepost .vimrc source $MYVIMRC
+
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
@@ -231,6 +233,9 @@ else
 
 endif " has("autocmd")
 
+" hotkey for open vimrc
+nmap <leader>rc :tabedit ~/dotfiles/.vimrc<CR>
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -253,7 +258,7 @@ endif
 "  endif
 "endfunction
 " remove temp logs
-function s:RemoveTempLogs()
+function! s:RemoveTempLogs()
     :Grep ^\s*Log\.Temp.*!!!
     :ResultListDo delete
 endfunction
