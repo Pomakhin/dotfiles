@@ -119,10 +119,11 @@ let g:EasyGrepRecursive=1
 let g:EasyGrepWindow=1
 let g:EasyGrepMode=2
 let g:EasyGrepJumpToMatch=0
-let g:EasyGrepFilesToExclude=".git,.meta,.un~"
+let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav"
 let g:EasyGrepCommand=1
 let g:EasyGrepReplaceWindowMode=2
 let g:EasyGrepSearchCurrentBufferDir=0  
+let g:EasyGrepRoot = "search:.git,.hg,.svn"
 
 
 " CtrlP settings
@@ -134,7 +135,7 @@ let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_tabpage_position = 'ac' 
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs\~)$',
+    \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs\~|un\~)$',
     \ }
 let g:ctrlp_max_files = 100000
 
