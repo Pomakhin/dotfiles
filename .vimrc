@@ -93,6 +93,11 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" set font for gvim
+if has('gui_running')
+  set guifont=Menlo\ Regular:h12
+endif
+
 set background=dark
 
 set backupdir=~/vimtmp,.
