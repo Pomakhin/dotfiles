@@ -41,6 +41,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'Shougo/unite.vim'
@@ -48,6 +49,11 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-fugitive'
 Plugin 'beyondmarc/glsl.vim'
+Plugin 'vim-scripts/Tail-Bundle'
+Plugin 'vim-scripts/Conque-GDB'
+Plugin 'cvim', {'pinned': 1}
+
+
 "Plugin 'zhaocai/GoldenView.Vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -103,6 +109,7 @@ set background=dark
 set backupdir=~/vimtmp,.
 set directory=~/vimtmp,.
 
+
 " YOU_COMPLETE_ME SETTINGS!!!
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -122,9 +129,10 @@ let g:goldenview__enable_at_startup = 1
 " EasyGrepo settings
 let g:EasyGrepRecursive=1
 let g:EasyGrepWindow=1
-let g:EasyGrepMode=2
+let g:EasyGrepMode=3
+let g:EasyGrepDefaultUserPattern="*.cpp *.h *.mm"
 let g:EasyGrepJumpToMatch=0
-let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav"
+let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav,.jpg*,.png*,.tar*,.mp3,.so,.swf*,.ipp,.fnt,.plist,.tar*,.xml,.swf*,.git*,.framework*,.dia,.d,.amf*,.hpp"
 let g:EasyGrepCommand=1
 let g:EasyGrepReplaceWindowMode=2
 let g:EasyGrepSearchCurrentBufferDir=0  
@@ -140,7 +148,7 @@ let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_tabpage_position = 'ac' 
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs\~|un\~)$',
+    \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs\~|un\~|o|dia|d)$',
     \ }
 let g:ctrlp_max_files = 100000
 
@@ -233,14 +241,25 @@ if has("autocmd")
 
   augroup END
 
+ augroup hfiles
+   au!
+   au BufEnter *.h let b:fswitchdst  = 'cpp,cc,C,mm'
+   au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
+
+   au BufEnter *.mm let b:fswitchdst  = 'h'
+   au BufEnter *.mm let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
+ augroup END
 else
 
   set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
 
+
+
 " hotkey for open vimrc
 nmap <leader>rc :tabedit ~/dotfiles/.vimrc<CR>
+nmap <silent> <Leader>h :FSHere<cr>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -265,7 +284,7 @@ endif
 "endfunction
 " remove temp logs
 function! s:RemoveTempLogs()
-    :Grep ^\s*Log\.Temp.*!!!
+    :Grep ^\s*LOG_DEBUG\>.*!!!
     :ResultListDo delete
 endfunction
 command! RemoveTempLogs :call s:RemoveTempLogs()
@@ -277,7 +296,7 @@ nmap <leader>l :set list!<CR>
 
 nnoremap <F7> :tabp<ENTER>
 nnoremap <F8> :tabn<ENTER>
-nnoremap <F2> :YcmCompleter GoToDefinition<ENTER>
+nnoremap <F2> :YcmCompleter GoTo<ENTER>
 "This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
@@ -292,6 +311,11 @@ nnoremap <silent> <F5> :NERDTreeToggle<CR>
 
 " search selection in visual mode
 vnoremap // y/<C-R>"<CR>
+
+" GIT
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr><C-w>20+
+nnoremap <leader>gc :Gcommit<cr>
 
 " inserts the current filename without the extension at the cursor position, when you are in insert mode
 inoremap \fn <C-R>=expand("%:t:r")<CR>
@@ -321,7 +345,7 @@ vnoremap <silent><C-Right> <Esc>`>:<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:c
 
 
 " Log.Temp macro insert file name and method name
-let @l = 'oLog.Temp();hi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!!$'
+let @l = 'oLOG_DEBUG(Drako::format());hhi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!!$'
 let @c = '`>a*/`<i/*'
 
 
