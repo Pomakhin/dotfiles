@@ -51,7 +51,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'beyondmarc/glsl.vim'
 Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'vim-scripts/Conque-GDB'
-Plugin 'cvim', {'pinned': 1}
+"Plugin 'cvim', {'pinned': 1}
+Plugin 'Pomakhin/cvim'
 
 
 "Plugin 'zhaocai/GoldenView.Vim'
