@@ -319,7 +319,8 @@ nnoremap <leader>gs :Gstatus<cr><C-w>20+
 nnoremap <leader>gc :Gcommit<cr>
 
 " inserts the current filename without the extension at the cursor position, when you are in insert mode
-inoremap \fn <C-R>=expand("%:t:r")<CR>
+inoremap <leader>fn <C-R>=expand("%:t:r")<CR>
+cnoremap <leader>fn <C-R>=expand("%:t:r")<CR>
 " start outlet for cpp and cs files
 autocmd BufRead *.h,*.cpp,*.cs TagbarOpen
 "autocmd BufEnter * call CallNerdFindIfOk() 
