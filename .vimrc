@@ -290,6 +290,11 @@ function! s:RemoveTempLogs()
 endfunction
 command! RemoveTempLogs :call s:RemoveTempLogs()
 
+function! s:CopyCurrentPath()
+    :redir @+ | echo @%
+endfunction
+command! CopyCurrentPath :call s:CopyCurrentPath()
+
 nnoremap <S-Enter> o<Esc>
 
 " show\hide invisible characters
@@ -328,7 +333,7 @@ autocmd BufRead *.h,*.cpp,*.cs TagbarOpen
 "autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
 "autocmd VimEnter * wincmd p
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Omnisharp find symbol
 autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
