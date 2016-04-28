@@ -291,7 +291,7 @@ endfunction
 command! RemoveTempLogs :call s:RemoveTempLogs()
 
 function! s:CopyCurrentPath()
-    :redir @+ | echo @%
+    :redir @+ | echo expand('%:p')  
 endfunction
 command! CopyCurrentPath :call s:CopyCurrentPath()
 
