@@ -53,7 +53,7 @@ Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'vim-scripts/Conque-GDB'
 "Plugin 'cvim', {'pinned': 1}
 Plugin 'Pomakhin/cvim'
-Plugin 'derekwyatt/vim-protodef'
+Plugin 'Pomakhin/vim-protodef-custom'
 
 
 "Plugin 'zhaocai/GoldenView.Vim'
