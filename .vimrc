@@ -53,6 +53,7 @@ Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'vim-scripts/Conque-GDB'
 "Plugin 'cvim', {'pinned': 1}
 Plugin 'Pomakhin/cvim'
+Plugin 'derekwyatt/vim-protodef'
 
 
 "Plugin 'zhaocai/GoldenView.Vim'
@@ -261,6 +262,11 @@ endif " has("autocmd")
 " hotkey for open vimrc
 nmap <leader>rc :tabedit ~/dotfiles/.vimrc<CR>
 nmap <silent> <Leader>h :FSHere<cr>
+
+
+nmap <leader>; :w<CR>
+nmap <leader>. :q<CR>
+imap <leader>' <Esc>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
