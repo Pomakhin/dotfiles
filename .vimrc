@@ -51,7 +51,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'beyondmarc/glsl.vim'
 Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'tfnico/vim-gradle'
 "Plugin 'cvim', {'pinned': 1}
+" customized plugins
 Plugin 'Pomakhin/cvim'
 Plugin 'Pomakhin/vim-protodef-custom'
 
@@ -132,7 +134,7 @@ let g:goldenview__enable_at_startup = 1
 let g:EasyGrepRecursive=1
 let g:EasyGrepWindow=1
 let g:EasyGrepMode=3
-let g:EasyGrepDefaultUserPattern="*.cpp *.h *.mm"
+let g:EasyGrepDefaultUserPattern="*.cpp *.h *.mm *.java *.xml"
 let g:EasyGrepJumpToMatch=0
 let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav,.jpg*,.png*,.tar*,.mp3,.so,.swf*,.ipp,.fnt,.plist,.tar*,.xml,.swf*,.git*,.framework*,.dia,.d,.amf*,.hpp"
 let g:EasyGrepCommand=1
@@ -263,9 +265,11 @@ endif " has("autocmd")
 nmap <leader>rc :tabedit ~/dotfiles/.vimrc<CR>
 nmap <silent> <Leader>h :FSHere<cr>
 
-
+" right hand mapping
 nmap <leader>; :w<CR>
 nmap <leader>. :q<CR>
+nmap , a
+nmap ,, A
 imap <leader>' <Esc>
 
 " Convenient command to see the difference between the current buffer and the
@@ -297,9 +301,14 @@ endfunction
 command! RemoveTempLogs :call s:RemoveTempLogs()
 
 function! s:CopyCurrentPath()
-    :redir @+ | echo expand('%:p')  
+    :let @+ = expand('%:p')  
 endfunction
 command! CopyCurrentPath :call s:CopyCurrentPath()
+
+function! s:CopyCurrentFileName()
+    :let @+ = expand('%:t')  
+endfunction
+command! CopyCurrentFileName :call s:CopyCurrentFileName()
 
 nnoremap <S-Enter> o<Esc>
 
