@@ -105,7 +105,11 @@ set expandtab
 
 " set font for gvim
 if has('gui_running')
-  set guifont=Menlo\ Regular:h12
+    if has('unix')
+        set guifont=Monospace\ 10
+    else
+        set guifont=Menlo\ Regular:h12
+    endif
 endif
 
 set background=dark
