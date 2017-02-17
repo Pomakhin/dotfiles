@@ -56,6 +56,7 @@ Plugin 'tfnico/vim-gradle'
 " customized plugins
 Plugin 'Pomakhin/cvim'
 Plugin 'Pomakhin/vim-protodef-custom'
+Plugin 'michaeljsmith/vim-indent-object'
 
 
 "Plugin 'zhaocai/GoldenView.Vim'
