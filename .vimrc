@@ -52,11 +52,15 @@ Plugin 'beyondmarc/glsl.vim'
 Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'vim-scripts/Conque-GDB'
 Plugin 'tfnico/vim-gradle'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'xolox/vim-session'
+Plugin 'xolox/vim-misc'
 "Plugin 'cvim', {'pinned': 1}
 " customized plugins
 Plugin 'Pomakhin/cvim'
 Plugin 'Pomakhin/vim-protodef-custom'
-Plugin 'michaeljsmith/vim-indent-object'
+
 
 
 "Plugin 'zhaocai/GoldenView.Vim'
@@ -118,6 +122,21 @@ set background=dark
 set backupdir=~/vimtmp,.
 set directory=~/vimtmp,.
 
+" session
+let g:session_autosave = 'yes'
+let g:session_autoload = 'yes'
+
+" clang-format settings
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11"}
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>zz :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>zz :ClangFormat<CR>
+
 
 " YOU_COMPLETE_ME SETTINGS!!!
 let g:ycm_confirm_extra_conf = 0
@@ -139,9 +158,9 @@ let g:goldenview__enable_at_startup = 1
 let g:EasyGrepRecursive=1
 let g:EasyGrepWindow=1
 let g:EasyGrepMode=3
-let g:EasyGrepDefaultUserPattern="*.cpp *.h *.mm *.java *.xml"
+let g:EasyGrepDefaultUserPattern="*.cpp *.h *.mm *.java"
 let g:EasyGrepJumpToMatch=0
-let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav,.jpg*,.png*,.tar*,.mp3,.so,.swf*,.ipp,.fnt,.plist,.tar*,.xml,.swf*,.git*,.framework*,.dia,.d,.amf*,.hpp"
+let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav,.jpg*,.png*,.tar*,.mp3,.so,.swf*,.ipp,.fnt,.plist,.tar*,.xml,.swf*,.git*,.framework*,.dia,.d,.amf*"
 let g:EasyGrepCommand=1
 let g:EasyGrepReplaceWindowMode=2
 let g:EasyGrepSearchCurrentBufferDir=0  
@@ -285,6 +304,12 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+function! s:LogCur()
+    :Glog -- %
+    :copen
+    :TagbarClose
+endfunction
+command! LogCur :call s:LogCur()
 
 " returns true iff is NERDTree open/active
 "function! IsNerdTreeOpen()        
@@ -315,6 +340,12 @@ function! s:CopyCurrentFileName()
 endfunction
 command! CopyCurrentFileName :call s:CopyCurrentFileName()
 
+function! s:OpenFileV(path)
+    :vnew
+    :e a:path
+endfunction
+command! -nargs=1 OpenFileV call s:OpenFileV (<f-args>)
+
 nnoremap <S-Enter> o<Esc>
 
 " show\hide invisible characters
@@ -322,6 +353,8 @@ nmap <leader>l :set list!<CR>
 
 nnoremap <F7> :tabp<ENTER>
 nnoremap <F8> :tabn<ENTER>
+nnoremap <S-F7> :tabm -1<ENTER>
+nnoremap <S-F8> :tabm +1<ENTER>
 nnoremap <F2> :YcmCompleter GoTo<ENTER>
 "This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
