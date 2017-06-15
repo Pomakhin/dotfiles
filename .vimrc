@@ -119,6 +119,7 @@ endif
 
 set background=dark
 
+" avoid creation *.~ *.swp files in the current dir
 set backupdir=~/vimtmp,.
 set directory=~/vimtmp,.
 
