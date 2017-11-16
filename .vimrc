@@ -123,6 +123,8 @@ set background=dark
 set backupdir=~/vimtmp,.
 set directory=~/vimtmp,.
 
+set lcs+=space:.
+
 " session
 let g:session_autosave = 'yes'
 let g:session_autoload = 'yes'
@@ -135,8 +137,8 @@ let g:clang_format#style_options = {
             \ "Standard" : "C++11"}
 
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>zz :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>zz :ClangFormat<CR>
+autocmd FileType c,cpp,objc,mm nnoremap <buffer><Leader>zz :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc,mm vnoremap <buffer><Leader>zz :ClangFormat<CR>
 
 
 " YOU_COMPLETE_ME SETTINGS!!!
@@ -288,6 +290,8 @@ endif " has("autocmd")
 
 " hotkey for open vimrc
 nmap <leader>rc :tabedit ~/dotfiles/.vimrc<CR>
+
+" hotkey for switch betwean *.cpp\*.h
 nmap <silent> <Leader>h :FSHere<cr>
 
 " right hand mapping
@@ -406,7 +410,7 @@ vnoremap <silent><C-Right> <Esc>`>:<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:c
 
 
 " Log.Temp macro insert file name and method name
-let @l = 'oLOG_DEBUG(Drako::format());hhi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!!$'
+let @l = 'oSystemFuncs::LogEventInfo();hi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!!$'
 let @c = '`>a*/`<i/*'
 
 
