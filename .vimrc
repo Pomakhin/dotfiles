@@ -56,6 +56,7 @@ Plugin 'rhysd/vim-clang-format'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
+Plugin 'tommcdo/vim-exchange'
 "Plugin 'cvim', {'pinned': 1}
 " customized plugins
 Plugin 'Pomakhin/cvim'
