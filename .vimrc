@@ -207,6 +207,10 @@ set nohidden
 " Since I use linux, I want this
 let g:clipbrdDefaultReg = '+'
 
+" vim-session
+let g:session_autosave = 'yes'
+let g:session_autoload = 'yes'
+
 "Status line gnarliness
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]\ %{fugitive#statusline()}
