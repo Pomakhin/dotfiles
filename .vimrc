@@ -23,6 +23,8 @@ set nocompatible
 " They say this prevent VIM from adding newline at end of file
 set fileformats+=dos
 
+let g:disable_protodef_sorting=1
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -127,8 +129,8 @@ set directory=~/vimtmp,.
 set lcs+=space:.
 
 " session
-let g:session_autosave = 'yes'
-let g:session_autoload = 'yes'
+" let g:session_autosave = 'yes'
+" let g:session_autoload = 'yes'
 
 " clang-format settings
 let g:clang_format#style_options = {
@@ -168,7 +170,7 @@ let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,
 let g:EasyGrepCommand=1
 let g:EasyGrepReplaceWindowMode=2
 let g:EasyGrepSearchCurrentBufferDir=0  
-let g:EasyGrepRoot = "search:.git,.hg,.svn"
+" let g:EasyGrepRoot = "search:.git,.hg,.svn"
 
 
 " CtrlP settings
@@ -208,8 +210,9 @@ set nohidden
 let g:clipbrdDefaultReg = '+'
 
 " vim-session
-let g:session_autosave = 'yes'
-let g:session_autoload = 'yes'
+" let g:session_autosave = 'yes'
+" let g:session_autoload = 'yes'
+let g:session_autoload = 'no'
 
 "Status line gnarliness
 set laststatus=2
@@ -415,7 +418,6 @@ vnoremap <silent><C-Right> <Esc>`>:<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:c
 
 
 " Log.Temp macro insert file name and method name
-let @l = 'oSystemFuncs::LogEventInfo();hi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!!$'
+let @l = 'oSystemFuncs::LogEventInfo();hi""i\fn "=tagbar#currenttag()€kl''''€kl%s€kr, '''']pa !!! \n$'
 let @c = '`>a*/`<i/*'
-
 
