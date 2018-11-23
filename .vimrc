@@ -359,6 +359,8 @@ function! s:OpenFileV(path)
 endfunction
 command! -nargs=1 OpenFileV call s:OpenFileV (<f-args>)
 
+nnoremap ; :
+
 nnoremap <S-Enter> o<Esc>
 
 " show\hide invisible characters
