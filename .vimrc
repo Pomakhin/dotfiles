@@ -151,6 +151,7 @@ let g:Omnisharp_start_server = 0
 let g:Omnisharp_stop_server  = 0
 let g:OmniSharp_host="http://localhost:20001"
 let g:ycm_csharp_server_port = 20001
+let g:ycm_use_clangd = 0
 
 " OmniSharp settings
 " let g:OmniSharp_server_type = 'roslyn'
@@ -163,13 +164,15 @@ let g:goldenview__enable_at_startup = 1
 " EasyGrepo settings
 let g:EasyGrepRecursive=1
 let g:EasyGrepWindow=1
+let g:EasyGrepOpenWindowOnMatch=1
 let g:EasyGrepMode=3
-let g:EasyGrepDefaultUserPattern="*.cpp *.h *.mm *.java"
+let g:EasyGrepDefaultUserPattern="*.cc *.cpp *.h *.mm *.java"
 let g:EasyGrepJumpToMatch=0
 let g:EasyGrepFilesToExclude=".git,.meta,.un~,.zip,.png,.unity3d,.bin,.fbx,.dll,.info,.meta,.prefab,.tga,.tif,.unity,.wav,.jpg*,.png*,.tar*,.mp3,.so,.swf*,.ipp,.fnt,.plist,.tar*,.xml,.swf*,.git*,.framework*,.dia,.d,.amf*"
 let g:EasyGrepCommand=1
 let g:EasyGrepReplaceWindowMode=2
 let g:EasyGrepSearchCurrentBufferDir=0  
+" let g:EasyGrepInvertWholeWord=1
 " let g:EasyGrepRoot = "search:.git,.hg,.svn"
 
 
@@ -185,6 +188,8 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(exe|so|dll|meta|fbx|unity|asset|anim|cs\~|un\~|o|dia|d)$',
     \ }
 let g:ctrlp_max_files = 100000
+let g:ctrlp_working_path_mode = ''
+let g:ctrlp_by_filename = 1
 
 let g:glsl_file_extensions = '*.glsl,*.vsh,*.fsh,*.frag,*.vert'
 
@@ -204,6 +209,9 @@ set ignorecase
 " And so is Artificial Intellegence!
 set smartcase
 
+" to prevent git diff with windows-created files
+:set nofixendofline
+
 " When I close a tab, remove the buffer
 set nohidden
 " Since I use linux, I want this
@@ -216,7 +224,7 @@ let g:session_autoload = 'no'
 
 "Status line gnarliness
 set laststatus=2
-set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]\ %{fugitive#statusline()}
+set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]\ %b\ %{fugitive#statusline()}
 
 colorscheme gruvbox 
 
@@ -282,11 +290,12 @@ if has("autocmd")
 
  augroup hfiles
    au!
+   au BufEnter *.h let b:fswitchdst  = 'cc'
    au BufEnter *.h let b:fswitchdst  = 'cpp,cc,C,mm'
    au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
 
-   au BufEnter *.mm let b:fswitchdst  = 'h'
-   au BufEnter *.mm let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
+   " jau BufEnter *.mm let b:fswitchdst  = 'h'
+   " au BufEnter *.mm let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
  augroup END
 else
 
@@ -358,6 +367,8 @@ function! s:OpenFileV(path)
     :e a:path
 endfunction
 command! -nargs=1 OpenFileV call s:OpenFileV (<f-args>)
+
+nnoremap <leader>b :lopen<ENTER>
 
 nnoremap ; :
 
