@@ -40,7 +40,6 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
 Plugin 'derekwyatt/vim-fswitch'
@@ -147,14 +146,6 @@ autocmd FileType c,cpp,objc,mm vnoremap <buffer><Leader>zz :ClangFormat<CR>
 " YOU_COMPLETE_ME SETTINGS!!!
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:Omnisharp_start_server = 0
-let g:Omnisharp_stop_server  = 0
-let g:OmniSharp_host="http://localhost:20001"
-let g:ycm_csharp_server_port = 20001
-let g:ycm_use_clangd = 0
-
-" OmniSharp settings
-" let g:OmniSharp_server_type = 'roslyn'
 
 let g:goldenview__enable_at_startup = 1
 
@@ -399,7 +390,7 @@ vnoremap // y/<C-R>"<CR>
 
 " GIT
 nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr><C-w>20+
+nnoremap <leader>gs :Git<cr><C-w>20+
 nnoremap <leader>gc :Gcommit<cr>
 
 " inserts the current filename without the extension at the cursor position, when you are in insert mode
@@ -414,11 +405,6 @@ autocmd BufRead *.h,*.cpp,*.cs TagbarOpen
 "autocmd VimEnter * wincmd p
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" Omnisharp find symbol
-autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
-autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
-autocmd FileType cs nnoremap <leader>r :OmniSharpRename<cr>
-autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
 
 " CamelCase move
 let g:camelchar = "A-Z0-9.,;:{([`'\""
