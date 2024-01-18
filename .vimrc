@@ -24,6 +24,7 @@ set nocompatible
 set fileformats+=dos
 
 let g:disable_protodef_sorting=1
+let g:session_autosave = 'no'
 
 filetype off                  " required
 
@@ -39,7 +40,7 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'Valloric/YouCompleteMe'
+"~ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-dispatch'
 Plugin 'majutsushi/tagbar'
 Plugin 'derekwyatt/vim-fswitch'
@@ -302,6 +303,10 @@ nmap <leader>. :q<CR>
 nmap , a
 nmap ,, A
 imap <leader>' <Esc>
+
+
+imap <C-V>		"+gP
+cmap <C-V>		"+gP
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
