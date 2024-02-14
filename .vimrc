@@ -119,6 +119,7 @@ set background=dark
 " avoid creation *.~ *.swp files in the current dir
 set backupdir=~/vimtmp,.
 set directory=~/vimtmp,.
+set undodir=~/vimtmp,.
 
 set lcs+=space:.
 
@@ -304,9 +305,12 @@ nmap , a
 nmap ,, A
 imap <leader>' <Esc>
 
-
-imap <C-V>		"+gP
-cmap <C-V>		"+gP
+command! Vb normal! <C-v>
+imap <C-V>	<C-r>+
+cmap <C-V>	<C-r>+
+nnoremap <M-v> <C-V>
+nmap <C-V>  "+p
+vnoremap <C-C> "+y
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
